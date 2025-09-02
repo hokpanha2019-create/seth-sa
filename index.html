@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>section_testing</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Koulen&family=Moul&display=swap");
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body.locked {
+        overflow: hidden;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      #page1,
+      #page2,
+      #page3,
+      #page4,
+      #page5 {
+        height: 100vh;
+        padding: 50px;
+      }
+
+      h1 {
+        color: #fff;
+        font-size: 4em;
+        font-family: "Moul", sans-serif;
+        font-weight: 400;
+      }
+      h2 {
+        color: #fff;
+        font-size: 3em;
+        font-family: "Koulen", sans-serif;
+        font-weight: 400;
+      }
+      p {
+        line-height: 1.5;
+        color: #fff;
+        font-size: 1.6em;
+        font-family: "Kantumruy Pro", sans-serif;
+        text-align: justify;
+        text-align-last: center;
+      }
+
+      #page1 {
+        padding-top: 150px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #c91212;
+        overflow: hidden;
+      }
+      #page1 video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .openbtn {
+        width: 200px;
+        height: 60px;
+        background: linear-gradient(
+          -90deg,
+          #a56c0b,
+          #f8e67d,
+          #c38f1b,
+          #c9a33d,
+          #b48514
+        );
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Koulen";
+        color: #fff;
+        font-size: 1.8em;
+        border: 0;
+        margin-bottom: 20px;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+      }
+      a {
+        font-size: 0.7em;
+        color: #fff;
+        font-family: "Kantumruy Pro", sans-serif;
+      }
+
+      #page2 {
+        background: rgb(255, 0, 212);
+      }
+      #page3 {
+        background: rgb(216, 7, 87);
+      }
+      #page4 {
+        background: rgb(45, 211, 23);
+      }
+      #page5 {
+        background: rgb(255, 208, 0);
+      }
+
+      #outroVideo {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+        z-index: 1000;
+      }
+      /* Pulse animation */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 20px 15px rgba(255, 215, 0, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body class="locked">
+    <section id="page1">
+      <video autoplay loop muted playsinline>
+        <source src="./Link/Asset/page_bg.mp4" type="video/mp4" />
+        your browser does not support the video tag.
+      </video>
+      <img src="./Link/Asset/Black & White 1.png" alt="picture" />
+      <p>សូមគោរពអញ្ជើញ</p>
+      <button class="openbtn" id="nextBtn">បើកធៀប</button>
+      <a>សូមមេត្តាចុចលើអេក្រង់ដើម្បីចុចបើកធៀបអេឡិចត្រូនិច</a>
+    </section>
+    <main id="content" style="display: none">
+      <section id="page2">Home</section>
+      <section id="page3">Agenda</section>
+      <section id="page4">Map</section>
+      <section id="page5">Wishing Form</section>
+    </main>
+
+    <video id="outroVideo" src="Link/Asset/outro.mp4" playsinline></video>
+
+    <script>
+      const nextBtn = document.getElementById("nextBtn");
+      const page1 = document.getElementById("page1");
+      const outro = document.getElementById("outroVideo");
+      const content = document.getElementById("content");
+
+      nextBtn.onclick = () => {
+        outro.style.display = "block";
+        outro.currentTime = 0;
+        outro.play();
+
+        outro.onended = () => {
+          outro.style.display = "none";
+          page1.style.display = "none";
+          content.style.display = "block";
+          document.body.classList.remove("locked");
+          document
+            .getElementById("page2")
+            .scrollIntoView({ behavior: "smooth" });
+        };
+      };
+    </script>
+  </body>
+</html>
